@@ -8,9 +8,10 @@ const unsplashApi = Axios.create({
   }
 });
 
-const searchPhotos = (query) => unsplashApi.get('/search/photos', {
-  params: { query }
-});
+const searchPhotos = async (query) => {
+  const response = await unsplashApi.get('/search/photos', { params: { query } });
+  return response.data.results;
+}
 
 export {
   unsplashApi,

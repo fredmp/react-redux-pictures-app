@@ -8,15 +8,14 @@ class App extends React.Component {
   state = { images: [] };
 
   onSearchSubmit = async term => {
-    const response = await searchPhotos(term);
-    this.setState({ images: response.data.results.map(image => image.urls.raw) });
+    this.setState({ images: await searchPhotos(term) });
   }
 
   render() {
     return (
       <div className="ui container" style={{ marginTop: '20px' }}>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <ImageList />
+        <ImageList images={this.state.images} />
       </div>
     );
   }
